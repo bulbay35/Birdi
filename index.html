@@ -2011,6 +2011,27 @@ function loadGameData() {
             }
         });
     }
+
+    // Yeni: buton sesi ekle
+    let buttonClickSound = new Audio('wood_plank_flicks.ogg');
+
+    function playButtonSound() {
+        if (buttonClickSound) {
+            buttonClickSound.currentTime = 0;
+            buttonClickSound.volume = globalVolume * 0.7;
+            buttonClickSound.play().catch(e => console.error("Buton sesi çalınamadı:", e));
+        }
+    }
+
+    // Tüm butonlara tıklanınca ses çal
+    window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                playButtonSound();
+            });
+        });
+    });
+    
 </script>
 
 </body>
