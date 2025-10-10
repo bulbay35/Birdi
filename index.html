@@ -2032,6 +2032,29 @@ function loadGameData() {
         });
     });
 
+
+// --- Yandex Games Reklam SDK Başlangıcı ---
+window.onload = async () => {
+  if (window.YaGames) {
+    YaGames.init().then(ysdk => {
+      window.ysdk = ysdk;
+      console.log("✅ Yandex SDK yüklendi");
+
+      // Test amaçlı tam ekran reklam (Yandex sistemine bildirim yapar)
+      ysdk.adv.showFullscreenAdv({
+        callbacks: {
+          onOpen: () => console.log("Reklam açıldı"),
+          onClose: () => console.log("Reklam kapandı"),
+          onError: (err) => console.error("Reklam hatası:", err)
+        }
+      });
+    });
+  } else {
+    console.warn("⚠️ Yandex SDK bulunamadı. Yandex Games ortamında çalıştırılmalı.");
+  }
+};
+// --- Yandex Games Reklam SDK Sonu ---
+
 </script>
 
 </body>
