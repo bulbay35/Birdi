@@ -2055,6 +2055,30 @@ window.onload = async () => {
 };
 // --- Yandex Games Reklam SDK Sonu ---
 
+
+// --- Ölüm Sayacı ve Reklam Sistemi ---
+let deathCount = 0; // toplam ölüm sayısı
+
+// Oyun bitişinde reklam kontrolü
+function gameOver() {
+  player1.alive = false;
+  deathCount++;
+
+  // Her 10. ölümde reklam göster
+  if (deathCount % 10 === 0 && window.ysdk) {
+    ysdk.adv.showFullscreenAdv({
+      callbacks: {
+        onOpen: () => console.log("Reklam açıldı"),
+        onClose: () => console.log("Reklam kapandı"),
+        onError: (err) => console.error("Reklam hatası:", err)
+      }
+    });
+  }
+
+  playGameOverMusic();
+  showMenu("gameOverMenu");
+}
+
 </script>
 
 </body>
