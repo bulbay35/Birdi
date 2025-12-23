@@ -1165,11 +1165,12 @@ const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     let W = window.innerWidth;
     let H = window.innerHeight;
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const DPR = IS_IOS ? Math.min(window.devicePixelRatio || 1, 2) : 1;
     canvas.width = W * DPR;
     canvas.height = H * DPR;
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(DPR, DPR);
 
     const GROUND_HEIGHT = 100;
