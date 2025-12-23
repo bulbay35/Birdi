@@ -294,9 +294,9 @@
         <a href="https://www.instagram.com/talhabulut2012/" class="instagram" target="_blank">Instagram</a>
         <a href="https://www.tiktok.com/@talha.bulut789" class="tiktok" target="_blank">TikTok</a>
         <a href="https://www.youtube.com/@irontalha12" class="youtube" target="_blank">YouTube</a>
-        <a href="https://t.me/+tmVJa0chY99lNzNk" class="telegram" target="_blank">Telegram sohbet grubu</a>
-        <a href="https://t.me/+nnFXwvoxeZU5ZDE0" class="telegram" target="_blank">Telegram Duyuru Grubu</a>
-        <a href="https://discord.gg/p7r7fRaZ" class="discord" target="_blank">BULBAY STUDİOS DİSCORD GRUBU</a>
+        <a href="https://t.me/+tmVJa0chY99lNzNk" class="telegram" target="_blank">Telegram chat group</a>
+        <a href="https://t.me/+nnFXwvoxeZU5ZDE0" class="telegram" target="_blank">Telegram Announcement Group</a>
+        <a href="https://discord.gg/p7r7fRaZ" class="discord" target="_blank">BULBAY STUDİOS DİSCORD GROUP</a>
     </div>
 </div>
 
@@ -1159,12 +1159,18 @@
         });
     }
 
-    const canvas = document.getElementById('gameCanvas');
+    const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
     let W = window.innerWidth;
     let H = window.innerHeight;
-    canvas.width = W;
-    canvas.height = H;
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.scale(DPR, DPR);
 
     const GROUND_HEIGHT = 100;
     const CEILING_HEIGHT = 50;
@@ -1305,7 +1311,7 @@
         }
 
         draw() {
-            ctx.shadowBlur = 15;
+            ctx.shadowBlur = IS_IOS ? 0 : 15;
             ctx.shadowColor = '#FFD700';
 
             const gradient = ctx.createLinearGradient(this.x, this.y, this.x + this.width, this.y + this.height);
@@ -1365,7 +1371,7 @@
             const currentHeight = this.height * scale;
 
             targetCtx.shadowColor = 'rgba(0,0,0,0.4)';
-            targetCtx.shadowBlur = 10;
+            targetCtx.shadowBlur = IS_IOS ? 0 : 10;
             targetCtx.shadowOffsetX = 5;
             targetCtx.shadowOffsetY = 5;
 
@@ -1503,7 +1509,7 @@
             ctx.fillStyle = gradient;
 
             ctx.shadowColor = 'rgba(0,0,0,0.5)';
-            ctx.shadowBlur = 10;
+            ctx.shadowBlur = IS_IOS ? 0 : 10;
             ctx.shadowOffsetX = 5;
             ctx.shadowOffsetY = 5;
 
@@ -1627,7 +1633,7 @@
         });
         
         ctx.shadowColor = 'rgba(0,0,0,0.3)';
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = IS_IOS ? 0 : 15;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = -10;
 
@@ -2083,4 +2089,3 @@ function gameOver() {
 
 </body>
 </html>
-
